@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-
 export const TITLE_H1_HERO = "Aqui Fue";
 export const SUBTITLE_HERO =
   "Comer es una experiencia, pero comer bien es una delicia.";
