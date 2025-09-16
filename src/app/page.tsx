@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ProductCard from '@/components/ProductCard';
-import { products } from '@/data/products';
+import { products } from '@/lib/data/products';
 import { Product } from '@/types/product';
 import Hero from '@/components/Hero-component';
 
