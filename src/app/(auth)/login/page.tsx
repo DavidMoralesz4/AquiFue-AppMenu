@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { InputField } from "@/components/molecules/InputField";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -47,37 +48,31 @@ export default function LoginPage() {
           </p>
         )}
 
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            className="w-full border rounded px-3 py-2"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className="text-xs text-red-600">{errors.email.message}</p>
-          )}
-        </div>
+        <InputField
+          label="Email"
+          id="email"
+          type="email"
+          required
+          error={!!errors.email}
+          errorMessage={errors.email?.message}
+          inputProps={{
+            autoComplete: "email",
+            ...register("email")
+          }}
+        />
 
-        <div className="space-y-1">
-          <label htmlFor="password" className="text-sm font-medium">
-            Contraseña
-          </label>
-          <input
-            id="password"
-            type="password"
-            autoComplete="current-password"
-            className="w-full border rounded px-3 py-2"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="text-xs text-red-600">{errors.password.message}</p>
-          )}
-        </div>
+        <InputField
+          label="Contraseña"
+          id="password"
+          type="password"
+          required
+          error={!!errors.password}
+          errorMessage={errors.password?.message}
+          inputProps={{
+            autoComplete: "current-password",
+            ...register("password")
+          }}
+        />
 
         <button
           disabled={isSubmitting}
