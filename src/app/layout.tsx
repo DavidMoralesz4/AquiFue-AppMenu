@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fast Food Deluxe - Menú de Comida Rápida",
+  title: "Picora - App",
   description: "Descubre nuestro delicioso menú de comida rápida. Hamburguesas, bebidas, acompañamientos y postres frescos y sabrosos.",
 };
 

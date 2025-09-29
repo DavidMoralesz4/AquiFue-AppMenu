@@ -2,15 +2,18 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 
+export type Role = "admin" | "customer";
+
 const bodySchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
+  role: z.enum(["admin"]),
 });
 
 export async function POST(request: Request) {
   try {
     const json = await request.json();
-    const { email, password } = bodySchema.parse(json);
+    const { email, password, role = "admin" } = bodySchema.parse(json);
 
     const supabase = await createServerSupabase();
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -21,6 +24,13 @@ export async function POST(request: Request) {
     if (error) {
       return NextResponse.json(
         { message: "Credenciales inválidas", code: error.code },
+        { status: 401 },
+      );
+    }
+
+    if (data.user.user_metadata.role !== "admin") {
+      return NextResponse.json(
+        { message: "No tienes permisos de administrador", code: "unauthorized" },
         { status: 401 },
       );
     }
