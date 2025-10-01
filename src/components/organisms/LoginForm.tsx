@@ -12,9 +12,14 @@ const formSchema = z.object({
   password: z.string().min(6, { message: "Mínimo 6 caracteres" }),
 });
 
+interface LoginFormProps {
+  role: "admin" | "customer";
+  redirectTo: string;
+}
+
 type FormValues = z.infer<typeof formSchema>;
 
-export default function LoginForm() {
+export default function LoginForm({ role, redirectTo }: LoginFormProps) {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const {
