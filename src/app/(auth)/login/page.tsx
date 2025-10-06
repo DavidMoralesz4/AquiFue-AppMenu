@@ -1,22 +1,22 @@
 import LoginForm from "@/components/organisms/LoginForm";
+import Image from 'next/image';
 
 export default function LoginPage() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-      <aside className="hidden md:flex items-center justify-center">
-        <img
-          src="/images/executive.jpg"
-          alt="Imagen administrativa"
-          width={600}
-          height={800}
-        />
-      </aside>
-      <main className="flex items-center justify-center p-6">
-        <div className="w-full max-w-md">
-          <h1>Iniciar sesión - Administrador</h1>
-          <LoginForm role="admin" redirectTo="/admin" />
+    <div className="w-dvw h-dvh bg-contain bg-black">
+      <img className="opacity-50" src="/images/PicoraLoginImg.jpg" alt="Imagen Administradora" />
+
+      <div className="absolute top-0 w-full p-8 flex items-center justify-center h-1/4 gap-2">
+        <Image src="./logo/logo.svg" alt="logo.svg" width={30} height={26}/>
+        <div className="flex flex-col">
+          <h1 className="text-white font-bold text-3xl">Picora</h1>
+          <p className="text-white">by Capital Code</p>
         </div>
-      </main>
+      </div>
+      
+      <div className="absolute bottom-0 w-full h-3/4 p-8 bg-red-950 rounded-t-4xl ">
+        <LoginForm role="admin" redirectTo="/admin" />
+      </div>
     </div>
   );
 }

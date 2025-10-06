@@ -40,52 +40,53 @@ export default function LoginForm({ role, redirectTo }: LoginFormProps) {
   };
 
   return (
-    <main className="min-h-dvh flex items-center justify-center p-6">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-sm space-y-4 border rounded-lg p-6"
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full max-w-sm space-y-4 rounded-lg p-6 flex flex-col gap-7 items-center"
+    >
+      <h1 className="text-4xl text-white text-center font-semibold">Iniciar sesión</h1>
+      <p className="text-white text-center">Todo lo que necesitas para vender esta aqui en Picora. Comienza ahora mismo</p>
+      {serverError && (
+        <p className="text-sm text-red-600" role="alert">
+          {serverError}
+        </p>
+      )}
+
+      <InputField
+        id="email"
+        type="email"
+        required
+        error={!!errors.email}
+        errorMessage={errors.email?.message}
+        inputProps={{
+          autoComplete: "email",
+          ...register("email"),
+        }}
+        className="bg-[#D9D9D9] rounded-xl w-full"
+        placeholder="Correo electrónico"
+        />
+
+      <InputField
+        id="password"
+        type="password"
+        required
+        error={!!errors.password}
+        errorMessage={errors.password?.message}
+        inputProps={{
+          autoComplete: "current-password",
+          ...register("password"),
+        }}
+        className="bg-[#D9D9D9] rounded-xl w-full"
+        placeholder="Contraseña"
+      />
+
+      <button
+        disabled={isSubmitting}
+        type="submit"
+        className="bg-black text-white rounded-lg px-4 py-2 disabled:opacity-60 w-3/4"
       >
-        <h1 className="text-2xl font-semibold">Iniciar sesión</h1>
-        {serverError && (
-          <p className="text-sm text-red-600" role="alert">
-            {serverError}
-          </p>
-        )}
-
-        <InputField
-          label="Email"
-          id="email"
-          type="email"
-          required
-          error={!!errors.email}
-          errorMessage={errors.email?.message}
-          inputProps={{
-            autoComplete: "email",
-            ...register("email"),
-          }}
-        />
-
-        <InputField
-          label="Contraseña"
-          id="password"
-          type="password"
-          required
-          error={!!errors.password}
-          errorMessage={errors.password?.message}
-          inputProps={{
-            autoComplete: "current-password",
-            ...register("password"),
-          }}
-        />
-
-        <button
-          disabled={isSubmitting}
-          type="submit"
-          className="w-full bg-black text-white rounded py-2 disabled:opacity-60"
-        >
-          {isSubmitting ? "Ingresando..." : "Ingresar"}
-        </button>
-      </form>
-    </main>
+        {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
+      </button>
+    </form>
   );
 }
