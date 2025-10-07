@@ -83,7 +83,7 @@ export default function LoginForm({ role, redirectTo }: LoginFormProps) {
       <button
         disabled={isSubmitting}
         type="submit"
-        className="bg-black text-white rounded-lg px-4 py-2 disabled:opacity-60 w-3/4"
+        className="bg-black w-full text-white rounded-lg px-4 py-2 disabled:opacity-60"
       >
         {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
       </button>
